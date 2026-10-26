@@ -1,0 +1,8 @@
+*.qcow2
+*.img
+*.iso
+*.vhdx
+*.vhd
+*.part
+testResults.xml
+.vscode/
