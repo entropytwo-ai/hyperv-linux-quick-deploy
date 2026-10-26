@@ -1,0 +1,31 @@
+name: CI
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: ${{ matrix.shell }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            shell: powershell   # Windows PowerShell 5.1
+          - os: windows-latest
+            shell: pwsh
+          - os: ubuntu-latest
+            shell: pwsh
+    defaults:
+      run:
+        shell: ${{ matrix.shell }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Analyzer + Pester (incl. live mirror checks)
+        run: ./tools/Invoke-StaticAnalysis.ps1 -Live
+      - name: -List (live image discovery through the real entry point)
+        run: |
+          ./New-QuickLinuxVM.ps1 -List
+          if ($LASTEXITCODE -ne 0) { exit 1 }
