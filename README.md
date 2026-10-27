@@ -20,6 +20,25 @@ If the execution policy blocks it, run
 
 ---
 
+## Table of Contents
+
+- [What it does](#what-it-does)
+- [Prerequisites](#prerequisites)
+- [Check first (changes nothing)](#check-first-changes-nothing)
+- [Examples](#examples)
+  - [Parameters](#parameters)
+- [Failover Cluster](#failover-cluster)
+- [Secure Boot per distro](#secure-boot-per-distro)
+- [How NixOS works](#how-nixos-works)
+- [Safety](#safety)
+- [What it changes on the host](#what-it-changes-on-the-host)
+- [Troubleshooting](#troubleshooting)
+- [Development](#development)
+  - [What has been verified](#what-has-been-verified)
+- [License](#license)
+
+---
+
 ## What it does
 
 1. **Detects the host.** You get a standalone Hyper-V host, or a cluster-aware run when the host is an Up
