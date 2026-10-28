@@ -79,6 +79,8 @@ If the execution policy blocks it, run
 If any step fails, everything this run created is **rolled back**: the clustered role, the VM and its
 folder. Verified downloads stay in the cache.
 
+<sub>[↑ Back to contents](#table-of-contents)</sub>
+
 ## Prerequisites
 
 | Requirement | Notes |
@@ -94,6 +96,8 @@ folder. Verified downloads stay in the cache.
 For the seed media, nothing extra is needed. The ISO is built with the IMAPI2 COM API that ships with
 Windows. If that is unavailable, the script uses `oscdimg.exe` from the Windows ADK, and as a last
 resort a small FAT32 VHDX labelled `CIDATA`. cloud-init accepts both.
+
+<sub>[↑ Back to contents](#table-of-contents)</sub>
 
 ## Check first (changes nothing)
 
@@ -112,6 +116,8 @@ resort a small FAT32 VHDX labelled `CIDATA`. cloud-init accepts both.
   rejects any unfilled placeholder.
 * **Images:** resolves every image, downloads and parses its checksum file, and checks the image URL
   is reachable.
+
+<sub>[↑ Back to contents](#table-of-contents)</sub>
 
 ## Examples
 
@@ -170,6 +176,8 @@ $pw = Read-Host -AsSecureString 'Password'
 | `-WhatIf`, `-Confirm` | | Standard PowerShell preview / per-step confirmation |
 | `-Check`, `-List` | | Read-only reports |
 
+<sub>[↑ Back to contents](#table-of-contents)</sub>
+
 ## Failover Cluster
 
 When the host is an Up node of a Failover Cluster (or with `-Mode Cluster`), the script does the
@@ -188,6 +196,8 @@ following:
 
 On rollback it removes the clustered role first, then the VM, then the folder.
 
+<sub>[↑ Back to contents](#table-of-contents)</sub>
+
 ## Secure Boot per distro
 
 | Distro | Secure Boot | Why |
@@ -197,6 +207,8 @@ On rollback it removes the clustered role first, then the VM, then the folder.
 | NixOS  | **Off** | The NixOS ISO and systemd-boot are not signed. `-SecureBoot On` with NixOS is refused. To use Secure Boot later, set up e.g. lanzaboote in the guest. |
 
 The Windows template (`MicrosoftWindows`) is never used, because it does not boot Linux.
+
+<sub>[↑ Back to contents](#table-of-contents)</sub>
 
 ## How NixOS works
 
@@ -218,6 +230,8 @@ This takes about 5-15 minutes and needs internet access in the guest. You can wa
 `vmconnect`. With `-NixOSInstall Manual`, or if the timeout is hit, the script prints the exact command
 and the three follow-up cmdlets so you can finish by hand. The command is typed using a US keyboard
 layout, which is what the NixOS installer uses by default.
+
+<sub>[↑ Back to contents](#table-of-contents)</sub>
 
 ## Safety
 
@@ -241,6 +255,8 @@ layout, which is what the NixOS installer uses by default.
   over SSH is disabled, and SSH password login is off whenever a key is provided.
 * **Logs** are written to `%ProgramData%\hyperv-linux-quick-deploy\logs` (they never contain passwords).
 
+<sub>[↑ Back to contents](#table-of-contents)</sub>
+
 ## What it changes on the host
 
 * `<VMPath>\QuickDeploy-Cache\`: downloaded images and converted VHDX files. Delete them whenever you
@@ -249,6 +265,8 @@ layout, which is what the NixOS installer uses by default.
   (`cidata.iso` / `nixos-config.iso`).
 * QEMU for Windows, but only if qemu-img was missing and you agreed to install it.
 * Logs under `%ProgramData%\hyperv-linux-quick-deploy\logs`.
+
+<sub>[↑ Back to contents](#table-of-contents)</sub>
 
 ## Troubleshooting
 
@@ -260,6 +278,8 @@ layout, which is what the NixOS installer uses by default.
 | *not on a Cluster Shared Volume* | Use `-VMPath C:\ClusterStorage\VolumeX\...` |
 | A mirror is unreachable | `-List` shows which one. Try again later, or use `-ImageUrl` with `-ImageChecksum`. |
 | NixOS install did not start | Open `vmconnect`, type the command printed in the summary, then run the follow-up cmdlets |
+
+<sub>[↑ Back to contents](#table-of-contents)</sub>
 
 ## Development
 
@@ -285,6 +305,10 @@ Windows, and PowerShell 7 on Linux. On Windows it also builds a real seed ISO wi
 The CI workflow covers PowerShell 5.1 and Windows-only code paths such as IMAPI2. End-to-end VM
 creation still needs a real Hyper-V host or cluster, so please report your results.
 
+<sub>[↑ Back to contents](#table-of-contents)</sub>
+
 ## License
 
 GPL-3.0. See [LICENSE](LICENSE).
+
+<sub>[↑ Back to contents](#table-of-contents)</sub>
